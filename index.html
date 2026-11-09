@@ -1,203 +1,234 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LauSeth AI Services</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<title>LauSeth Social</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #fff;
-      color: #222;
-      min-height: 100vh;
-    }
-
-    .header {
-      background: linear-gradient(135deg, #e60023, #ff4f81);
-      color: white;
-      padding: 30px 20px;
-      border-radius: 0 0 30px 30px;
-    }
-
-    .header h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-
-    .header p {
-      font-size: 15px;
-      opacity: 0.95;
-    }
-
-    .container {
-      padding: 25px 18px;
-    }
-
-    .welcome {
-      margin-bottom: 20px;
-    }
-
-    .welcome h2 {
-      font-size: 22px;
-      margin-bottom: 6px;
-    }
-
-    .welcome p {
-      color: #777;
-    }
-
-    .services {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid #ffd0dc;
-      border-radius: 20px;
-      padding: 22px 15px;
-      text-align: center;
-      box-shadow: 0 5px 18px rgba(230, 0, 35, 0.08);
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .card:active {
-      transform: scale(0.96);
-    }
-
-    .icon {
-      font-size: 38px;
-      margin-bottom: 12px;
-    }
-
-    .card h3 {
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-
-    .card p {
-      font-size: 12px;
-      color: #888;
-    }
-
-    .featured {
-      margin-top: 22px;
-      background: #fff0f5;
-      border-radius: 22px;
-      padding: 20px;
-      border: 1px solid #ffc2d1;
-    }
-
-    .featured h3 {
-      color: #e60023;
-      margin-bottom: 8px;
-    }
-
-    .featured p {
-      color: #666;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .button {
-      display: block;
-      margin-top: 15px;
-      background: #e60023;
-      color: white;
-      text-decoration: none;
-      text-align: center;
-      padding: 13px;
-      border-radius: 12px;
-      font-weight: bold;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 25px;
-      color: #999;
-      font-size: 12px;
-    }
-  </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#090909;color:white;
+  font-family:Arial,sans-serif;
+}
+header{
+  height:65px;padding:0 18px;
+  display:flex;align-items:center;
+  justify-content:space-between;
+  background:#111;position:sticky;top:0;z-index:5;
+}
+.logo{font-size:23px;font-weight:bold}
+.logo span{color:#ff245f}
+.search{font-size:23px;cursor:pointer}
+.tabs{
+  display:flex;justify-content:center;gap:35px;
+  padding:17px;background:#111;
+}
+.tab{color:#888;cursor:pointer;font-weight:bold}
+.tab.active{color:white;border-bottom:3px solid #ff245f;padding-bottom:8px}
+.feed{max-width:600px;margin:auto;padding-bottom:85px}
+.post{
+  position:relative;height:570px;max-height:75vh;
+  margin:12px;background:#1b1b1b;
+  border-radius:17px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.video-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(145deg,#29000d,#e6003d,#171717);
+}
+.post:nth-child(2) .video-bg{
+  background:linear-gradient(145deg,#090909,#6b1644,#ff245f);
+}
+.post:nth-child(3) .video-bg{
+  background:linear-gradient(145deg,#300000,#171717,#a90032);
+}
+.play{
+  position:relative;font-size:55px;
+  opacity:.8;
+}
+.post-info{
+  position:absolute;bottom:20px;left:15px;
+  right:75px;z-index:2;
+}
+.post-info h3{margin-bottom:9px}
+.post-info p{font-size:14px;line-height:1.5}
+.actions{
+  position:absolute;right:12px;bottom:25px;
+  display:flex;flex-direction:column;gap:20px;
+  z-index:3;text-align:center;
+}
+.action{font-size:25px;cursor:pointer}
+.action small{display:block;font-size:11px;margin-top:4px}
+.liked{color:#ff245f}
+.bottom{
+  position:fixed;bottom:0;left:0;right:0;
+  background:#111;border-top:1px solid #333;
+  display:flex;justify-content:space-around;
+  padding:13px 3px 18px;z-index:10;
+}
+.nav{
+  color:#999;text-align:center;
+  font-size:12px;cursor:pointer;
+}
+.nav b{display:block;font-size:21px;margin-bottom:4px}
+.nav.active{color:#ff245f}
+.create{
+  background:#ff245f;color:white;
+  border-radius:8px;padding:3px 12px;
+}
+.notice{
+  text-align:center;color:#aaa;
+  padding:25px;font-size:13px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="header">
-    <h1>🤖 LauSeth AI</h1>
-    <p>Your smart AI assistant</p>
-  </div>
+<header>
+  <div class="logo">LauSeth<span>Social</span></div>
+  <div class="search" onclick="searchPosts()">⌕</div>
+</header>
 
-  <div class="container">
+<div class="tabs">
+  <div class="tab active" onclick="switchTab(this,'For You')">For You</div>
+  <div class="tab" onclick="switchTab(this,'Following')">Following</div>
+</div>
 
-    <div class="welcome">
-      <h2>What do you want to create?</h2>
-      <p>Choose an AI service below.</p>
+<main class="feed" id="feed">
+
+  <section class="post">
+    <div class="video-bg"></div>
+    <div class="play">▶</div>
+    <div class="post-info">
+      <h3>@lauseth_official</h3>
+      <p>Welcome to LauSeth Social 🔥 Your world. Your creativity. #LauSeth</p>
     </div>
-
-    <div class="services">
-
-      <div class="card" onclick="alert('CV Maker coming soon!')">
-        <div class="icon">📄</div>
-        <h3>CV Maker</h3>
-        <p>Create a professional CV</p>
-      </div>
-
-      <div class="card" onclick="alert('Caption Generator coming soon!')">
-        <div class="icon">✍️</div>
-        <h3>Captions</h3>
-        <p>Generate amazing captions</p>
-      </div>
-
-      <div class="card" onclick="alert('Summary tool coming soon!')">
-        <div class="icon">📝</div>
-        <h3>Summarizer</h3>
-        <p>Summarize your text</p>
-      </div>
-
-      <div class="card" onclick="alert('Poster Maker coming soon!')">
-        <div class="icon">🎨</div>
-        <h3>Poster Maker</h3>
-        <p>Create poster ideas</p>
-      </div>
-
-      <div class="card" onclick="alert('AI Chat coming soon!')">
-        <div class="icon">💬</div>
-        <h3>AI Chat</h3>
-        <p>Chat with AI</p>
-      </div>
-
-      <div class="card" onclick="alert('More AI services coming soon!')">
-        <div class="icon">✨</div>
-        <h3>More</h3>
-        <p>Explore AI services</p>
-      </div>
-
+    <div class="actions">
+      <div class="action" onclick="likePost(this)">♡<small>0</small></div>
+      <div class="action" onclick="commentPost()">💬<small>Comment</small></div>
+      <div class="action" onclick="sharePost()">↗<small>Share</small></div>
+      <div class="action">＋<small>Follow</small></div>
     </div>
+  </section>
 
-    <div class="featured">
-      <h3>🚀 LauSeth AI Services</h3>
-      <p>
-        Use artificial intelligence to create CVs,
-        captions, summaries, posters and more.
-      </p>
-
-      <a href="#" class="button">Get Started</a>
+  <section class="post">
+    <div class="video-bg"></div>
+    <div class="play">▶</div>
+    <div class="post-info">
+      <h3>@creative_mind</h3>
+      <p>Create something amazing today ✨ #Creativity</p>
     </div>
+    <div class="actions">
+      <div class="action" onclick="likePost(this)">♡<small>0</small></div>
+      <div class="action" onclick="commentPost()">💬<small>Comment</small></div>
+      <div class="action" onclick="sharePost()">↗<small>Share</small></div>
+      <div class="action">＋<small>Follow</small></div>
+    </div>
+  </section>
 
-  </div>
+  <section class="post">
+    <div class="video-bg"></div>
+    <div class="play">▶</div>
+    <div class="post-info">
+      <h3>@lauseth_music</h3>
+      <p>Music. Dreams. Ambition. 🎵 #LauSeth</p>
+    </div>
+    <div class="actions">
+      <div class="action" onclick="likePost(this)">♡<small>0</small></div>
+      <div class="action" onclick="commentPost()">💬<small>Comment</small></div>
+      <div class="action" onclick="sharePost()">↗<small>Share</small></div>
+      <div class="action">＋<small>Follow</small></div>
+    </div>
+  </section>
 
-  <div class="footer">
-    © 2026 LauSeth AI Services
+  <div class="notice">More content coming to LauSeth Social.</div>
+</main>
+
+<nav class="bottom">
+  <div class="nav active" onclick="navigate(this,'Home')">
+    <b>⌂</b>Home
   </div>
+  <div class="nav" onclick="navigate(this,'Discover')">
+    <b>⌕</b>Discover
+  </div>
+  <div class="nav" onclick="createPost()">
+    <b class="create">＋</b>Create
+  </div>
+  <div class="nav" onclick="navigate(this,'AI')">
+    <b>✧</b>AI
+  </div>
+  <div class="nav" onclick="navigate(this,'Profile')">
+    <b>♙</b>Profile
+  </div>
+</nav>
+
+<script>
+function likePost(button){
+  const count=button.querySelector("small");
+  let number=Number(count.textContent);
+  if(button.classList.contains("liked")){
+    button.classList.remove("liked");
+    button.firstChild.textContent="♡";
+    count.textContent=number-1;
+  }else{
+    button.classList.add("liked");
+    button.firstChild.textContent="♥";
+    count.textContent=number+1;
+  }
+}
+
+function commentPost(){
+  const comment=prompt("Write your comment:");
+  if(comment && comment.trim()){
+    alert("Comment preview: "+comment);
+  }
+}
+
+function sharePost(){
+  if(navigator.share){
+    navigator.share({
+      title:"LauSeth Social",
+      text:"Join me on LauSeth Social!"
+    }).catch(()=>{});
+  }else{
+    alert("LauSeth Social");
+  }
+}
+
+function switchTab(element,name){
+  document.querySelectorAll(".tab").forEach(
+    tab=>tab.classList.remove("active")
+  );
+  element.classList.add("active");
+  if(name==="Following"){
+    alert("Following feed will be connected in a later phase.");
+  }
+}
+
+function navigate(element,page){
+  document.querySelectorAll(".nav").forEach(
+    nav=>nav.classList.remove("active")
+  );
+  element.classList.add("active");
+  if(page!=="Home"){
+    alert(page+" section is coming in the next phase.");
+  }
+}
+
+function createPost(){
+  alert("Video and photo uploads will be added in the next phase.");
+}
+
+function searchPosts(){
+  const query=prompt("Search LauSeth Social:");
+  if(query) alert("Search feature: "+query);
+}
+</script>
 
 </body>
-  </html>
+</html>
+
